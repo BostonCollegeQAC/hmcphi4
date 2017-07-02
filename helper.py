@@ -3,10 +3,11 @@ import numpy as np
 def action(phi,hop,kappa,lamb):
     s = 0.0
     size = len(phi)
-    dim = len(hop[0])
+    dim = len(hop[0])//2
     
     for i in range(0,size):
         j = 0.0
+        #sum over positive direction only
         for imu in range(0,dim):
             j += phi[hop[i][imu]]
 
@@ -35,11 +36,11 @@ def gaussrand(size):
 ##leap-frog methods:
 def movepi(pi,phi,hop,kappa,lamb,eps):
     size = len(phi)
-    dim = len(hop[0])
+    twodim = len(hop[0])
 
     for i in range(0,size):
         phi_nnsum = 0.0
-        for imu in range(0,dim):
+        for imu in range(0,twodim):
             phi_nnsum += phi[hop[i][imu]]
 
         pi[i] += eps*(2.0*kappa - 2.0*phi[i] \
