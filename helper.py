@@ -6,13 +6,13 @@ def action(phi,hop,kappa,lamb):
     dim = len(hop[0])//2
     
     for i in range(0,size):
-        j = 0.0
+        phi_nnsum = 0.0
         #sum over positive direction only
         for imu in range(0,dim):
-            j += phi[hop[i][imu]]
+            phi_nnsum += phi[hop[i][imu]]
 
         phi2 = phi[i]**2
-        s += -2.0*kappa*j*phi[i] + phi2 + lamb*(phi2-1.0)**2
+        s += -2.0*kappa*phi_nnsum*phi[i] + phi2 + lamb*(phi2-1.0)**2
 
     return s
 
@@ -43,7 +43,7 @@ def movepi(pi,phi,hop,kappa,lamb,eps):
         for imu in range(0,twodim):
             phi_nnsum += phi[hop[i][imu]]
 
-        pi[i] += eps*(2.0*kappa - 2.0*phi[i] \
+        pi[i] += eps*(2.0*kappa*phi_nnsum - 2.0*phi[i] \
                     - 4.0*lamb*(phi[i]**2-1.0)*phi[i])
 
 def movephi(phi,pi,eps):

@@ -2,15 +2,13 @@ import numpy as np
 
 class lattice:
     def __init__(self):
-        self.dim = 4
-        self.l = 4
+        self.dim = 3
+        self.l = 6
         self.v = self.l**self.dim
 
-        self.kappa = 0.18169
-        self.lamb = 1.3282
+        self.kappa = 0.22
+        self.lamb = 1.1689
 
-        #self.phi = np.zeros(self.v,dtype=np.int)
-        #self.pi = np.zeros(self.v,dtype=np.int)
         self.hop = np.zeros((self.v,2*self.dim),dtype=np.int)
 
         
